@@ -39,6 +39,15 @@ import {hasPrerequisites} from 'features';
     );
 
   // TODO SW-2 - register the service worker
+  if (!("serviceWorker" in navigator)) {
+    return console.error("Service worker not supported.");
+  }
+  navigator.serviceWorker.register("service-worker.js", {
+  }).then(function (registration) {
+    console.log("Registration at scope: ", registration.scope);
+  }).catch(function (error) {
+    console.error("Registration failed: ", error);
+  });
 
   // Your custom JavaScript goes here
   let app = new App();
